@@ -1,9 +1,7 @@
 // all the necessary modules
 const express = require('express')
 const app = express()
-// const mongoose = require('mongoose')
 const Sequelize = require('sequelize')
-// const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 
@@ -36,6 +34,7 @@ app.get('/api/towatches', ( req, res ) => {
 
 app.post('/api/towatches', ( req, res ) => {
 	// add a movie to watch
+	console.log( req.body.text )
 	Towatch.create({
 		text: req.body.text,
 		done: false
@@ -46,7 +45,7 @@ app.post('/api/towatches', ( req, res ) => {
 	})
 })
 
-app.delete('/api/towatches', ( req, res ) => {
+app.delete('/api/towatches/:id', ( req, res ) => {
 	Towatch.destroy({
 		where: { id: req.params.id }
 	})
@@ -54,6 +53,10 @@ app.delete('/api/towatches', ( req, res ) => {
 	.then( data => {
 		res.json( data )
 	})
+})
+
+app.get( '*', ( req, res ) => {
+	res.sendFile( './public/index.html' )
 })
 
 // sync db
