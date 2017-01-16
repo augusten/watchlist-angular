@@ -1,17 +1,11 @@
-<!-- index.html -->
 <!doctype html>
-
-<!-- ASSIGN OUR ANGULAR MODULE -->
 <html>
     <head>
-        <!-- META -->
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
         <title>First Angular App</title>
-        <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">< load bootstrap -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
         <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="css/main.css">
 
         
         <!-- scripts -->
@@ -25,7 +19,7 @@
         <div class="container" ng-controller="mainController">
 
             <div class="text-center">
-                <h1>Watch count: <span class="label label-info">{{ towatches.length }}</span></h1>
+                <h1>Watch count: <span class="label label-info"> {{ towatches.length }} </span></h1>
             </div>
 
             <!-- The to watch list -->
@@ -78,8 +72,6 @@
                                 </tr>
                             </tbody>
                         </table>
-
-                        <!-- <input type="submit" class="btn btn-primary btn-lg" ng-model="addButton" ng-click="createTowatch()" value="Add"> -->
                     </div>
                 </div>
             </div>
@@ -87,7 +79,7 @@
         </div>
 
     </body>
-    <script src="core.js"></script>
-    <script src="controllers.js"></script>
-    <script src="services.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
 </html>

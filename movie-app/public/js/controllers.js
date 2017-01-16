@@ -2,7 +2,7 @@
 //---------------------- Create Angular controllers ----------------------
 
 toWatch.controller('mainController', ['$scope', '$http', 'search', function ( $scope, $http, search ) {	
-	// 
+	// initialize some parameters upon first load of page
 	$scope.movieFound = { data: {Title: '', Language: '', Year: '', Plot: '' }}
 	$scope.formData = {}
 
@@ -10,46 +10,29 @@ toWatch.controller('mainController', ['$scope', '$http', 'search', function ( $s
 	$http.get('/api/towatches')
 		.success( function( data ) {
 			$scope.towatches = data
-			console.log( data )
 		} )
 		.error ( function (data) {
 			console.log ( "error: " + data )
 		})
 
-	// post request to backend to add another to-watch
-	// $scope.createTowatch = function() {
-	// 	$http.post('/api/towatches', $scope.formData)
-	// 		.success(function(data) {
-	// 		    $scope.formData = {} // clear the form so our user is ready to enter another
-	// 		    $scope.towatches = data
-	// 		    console.log(data)
-	// 		})
-	// 		.error(function(data) {
-	// 		    console.log('Error: ' + data);
-	// 		})
-	// }
-
-
-
 	// delete request to delete it
     $scope.deleteTowatch = function( id ) {
         $http.delete('/api/towatches/' + id)
             .success(function(data) {
-                $scope.towatches = data;
-                console.log(data);
+                $scope.towatches = data
             })
             .error(function(data) {
-                console.log('Error: ' + data);
+                console.log('Error: ' + data)
             })
     }
 
 	$scope.findTowatch = function( ) {
-		console.log( $scope.formData )
+		// search for a movie/ enable service
 		$scope.movieFound = search.requestLink ( $scope.formData.text )
 	}
 
 	$scope.createTowatch = function() {
-
+		// add a to watch to the database
 		$http.post('/api/towatches', {text: $scope.movieFound.$$v.data.Title } )
 		.success ( function ( data ) {
 			$scope.formData = {}
