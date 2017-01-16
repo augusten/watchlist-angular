@@ -7,53 +7,80 @@
         <!-- META -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+        <title>First Angular App</title>
+        <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">< load bootstrap -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="main.css">
 
-        <title>Node/Angular Towatch App</title>
-        <!-- SCROLLS -->
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+        
         <!-- scripts -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- <load jquery -->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
-        <!-- <script src="core.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
 
     </head>
-    <!-- SET THE CONTROLLER AND GET ALL TODOS -->
+    <!-- set ng-app and ng-controller scopes -->
     <body ng-app="toWatch">
         <div class="container" ng-controller="mainController">
-            <p> Hello there! </p>
 
-            <!-- HEADER AND TODO COUNT -->
             <div class="text-center">
-                <h1>Left to watch: <span class="label label-info">{{ towatches.length }}</span></h1>
+                <h1>Watch count: <span class="label label-info">{{ towatches.length }}</span></h1>
             </div>
 
             <!-- The to watch list -->
             <div class="row">
-                <div class="col-sm-4 col-sm-offset-4">
+                <div class="col s4">
 
-                    <!-- loop over the towatches in $scope.todos -->
-                    <div class="checkbox" ng-repeat="towatch in towatches">
-                        <label>
-                            <input type="checkbox" ng-click="deleteTowatch(towatch.id)"> {{ towatch.text }}
+                    <!-- loop over the towatches with ng-repeat -->
+                    <div ng-repeat="towatch in towatches">
+                        <input id="{{towatch.id}}" type="checkbox" ng-click="deleteTowatch(towatch.id)">
+                        <label for="{{towatch.id}}"> {{ towatch.text }}
                         </label>
                     </div>
 
                 </div>
-            </div>
 
             <!-- create a to-watch item -->
-            <div class="row">
-                <div class="col-sm-8 col-sm-offset-2 text-center">
+                <div class="col s8">
                     <form>
-                        <div class="form-group">
-
-                            <!-- bind the value to formData.text -->
-                            <input type="text" class="form-control input-lg text-center" placeholder="search for moviessss" ng-model="formData.text">
+                        <div class="input-field row">
+                            <div class="col s8">
+                                <!-- bind the value to formData.text -->
+                                <input id="search" type="text" class="validate" placeholder="Enter the movie titleeeee" ng-model="formData.text">
+                                <!-- <label for="search"> What's the title? </label> -->
+                            </div>
+                            <div class="col s4">
+                                <button type="submit" class="waves-effect waves-light btn red" ng-click="showDiv=true; findTowatch()">Search</button>
+                            </div>
                         </div>
-
-                        <!-- create a new to watch -->
-                        <button type="submit" class="btn btn-primary btn-lg" ng-click="createTowatch()">Search</button>
                     </form>
+                    <div ng-show="showDiv" >
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Year</th>
+                                    <th>Language</th>
+                                    <th>Plot</th>
+                                    <th>Add</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td> {{ movieFound.data.Title }} </td>
+                                    <td> {{ movieFound.data.Year }} </td>
+                                    <td> {{ movieFound.data.Language }}</td>
+                                    <td> {{ movieFound.data.Plot }} </td>
+                                    <td> 
+                                        <a class="btn-floating btn-large waves-effect waves-light red" ng-model="addButton" ng-click="createTowatch()"><i class="material-icons">add</i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- <input type="submit" class="btn btn-primary btn-lg" ng-model="addButton" ng-click="createTowatch()" value="Add"> -->
+                    </div>
                 </div>
             </div>
 

@@ -67,7 +67,7 @@ app.delete('/api/towatches/:id', ( req, res ) => {
 
 })
 
-app.get( '*', ( req, res ) => {
+app.get( '/', ( req, res ) => {
 	res.sendFile( './public/index.html' )
 })
 

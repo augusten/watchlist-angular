@@ -3,7 +3,7 @@
 
 toWatch.controller('mainController', ['$scope', '$http', 'search', function ( $scope, $http, search ) {	
 	// 
-
+	$scope.movieFound = { data: {Title: '', Language: '', Year: '', Plot: '' }}
 	$scope.formData = {}
 
 	// get requests to backend to fetch all to-watches
@@ -43,11 +43,20 @@ toWatch.controller('mainController', ['$scope', '$http', 'search', function ( $s
             })
     }
 
+	$scope.findTowatch = function( ) {
+		console.log( $scope.formData )
+		$scope.movieFound = search.requestLink ( $scope.formData.text )
+	}
+
 	$scope.createTowatch = function() {
-		// console.log( search )
-		search.success( function( data ) {
-			console.log( data )
-			$scope.movie = data
+
+		$http.post('/api/towatches', {text: $scope.movieFound.$$v.data.Title } )
+		.success ( function ( data ) {
+			$scope.formData = {}
+			$scope.towatches = data
+		})
+		.error ( function ( data ) {
+			console.log( "errrorrrrrrrrr: " + data)
 		})
 	}
 }])
