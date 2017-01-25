@@ -5,7 +5,6 @@ const express = require('express')
 const app = express()
 const Sequelize = require('sequelize')
 const bodyParser = require('body-parser')
-const methodOverride = require('method-override')
 
 // use express for the view
 app.use(express.static(__dirname + '/public'))
@@ -13,9 +12,6 @@ app.use(express.static(__dirname + '/public'))
 // Body parser to be able to input data into view   
 app.use(bodyParser.urlencoded({'extended':'true'}))       
 app.use(bodyParser.json())
-app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
-app.use(methodOverride());
-
 
 /////////////////////////////////////////////////////////////////////////
 //------------------------------ DATABASE -------------------------------
